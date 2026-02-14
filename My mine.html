@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islam Connect</title>
+<style>
+body{margin:0;font-family:Arial;background:#020617;color:white}
+.page{display:none;padding:20px;padding-bottom:90px}
+.page.active{display:block}
+h1{text-align:center}
+.card{background:#0f172a;padding:15px;border-radius:14px;margin:12px 0}
+button{background:#22c55e;border:none;color:black;padding:10px 14px;border-radius:20px;margin-top:6px}
+.nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#020617;padding:10px}
+.arab{font-size:22px;text-align:right}
+</style>
+</head>
+<body>
+
+<div id="home" class="page active">
+<h1>Quotes</h1>
+<div class="card" id="quote">Klik tombol buat ganti quote</div>
+<button onclick="newQuote()">Ganti</button>
+</div>
+
+<div id="game" class="page">
+<h1>Tebak Ayat</h1>
+<div class="card" id="quiz"></div>
+<div class="card" id="answer" style="display:none;"></div>
+<button onclick="showAnswer()">Lihat Jawaban</button>
+<button onclick="newQuiz()">Soal Baru</button>
+</div>
+
+<div id="quran" class="page">
+<h1>Ayat Suci</h1>
+<div class="card arab" id="arab"></div>
+<div class="card" id="arti"></div>
+<button onclick="newAyat()">Ganti Ayat</button>
+</div>
+
+<div class="nav">
+<button onclick="show('home')">Quotes</button>
+<button onclick="show('game')">Quiz</button>
+<button onclick="show('quran')">Ayat</button>
+</div>
+
+<script>
+const quotes=[
+"Allah selalu dekat.",
+"Jangan putus asa.",
+"Sabar itu kuat.",
+"Doa itu senjata.",
+"Ikhlas itu lega."
+];
+
+const ayat=[
+{a:"إِنَّ مَعَ الْعُسْرِ يُسْرًا",t:"Sesungguhnya bersama kesulitan ada kemudahan (QS Al-Insyirah:6)"},
+{a:"فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ",t:"Maka nikmat Tuhanmu yang manakah yang kamu dustakan? (QS Ar-Rahman:13)"},
+{a:"قُلْ هُوَ ٱللَّهُ أَحَدٌ",t:"Katakanlah: Dialah Allah Yang Maha Esa (QS Al-Ikhlas:1)"},
+{a:"إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",t:"Hanya kepada-Mu kami menyembah (QS Al-Fatihah:5)"},
+{a:"وَٱللَّهُ غَفُورٌ رَّحِيمٌ",t:"Allah Maha Pengampun lagi Maha Penyayang"}
+];
+
+const quizs=[
+{q:"Surat tentang keikhlasan?",a:"Al-Ikhlas"},
+{q:"Surat pembuka Al-Qur'an?",a:"Al-Fatihah"},
+{q:"Surat terakhir dalam Al-Qur'an?",a:"An-Nas"},
+{q:"Surat tentang nikmat Tuhan?",a:"Ar-Rahman"},
+{q:"Surat tentang manusia?",a:"An-Nas"}
+];
+
+function show(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+function newQuote(){
+ quote.innerText=quotes[Math.floor(Math.random()*quotes.length)];
+}
+
+function newAyat(){
+ let r=ayat[Math.floor(Math.random()*ayat.length)];
+ arab.innerText=r.a;
+ arti.innerText=r.t;
+}
+
+function newQuiz(){
+ let r=quizs[Math.floor(Math.random()*quizs.length)];
+ quiz.innerText=r.q;
+ answer.innerText="Jawaban: "+r.a;
+ answer.style.display="none";
+}
+
+function showAnswer(){
+ answer.style.display="block";
+}
+</script>
+
+</body>
+</html>
